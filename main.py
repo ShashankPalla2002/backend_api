@@ -4,6 +4,7 @@ import uvicorn
 from pydantic import BaseModel
 from datetime import datetime
 import logging
+import os
 
 from scheduler import SCHEDULER
 from database import DATABASE
@@ -16,6 +17,11 @@ class SCHEDULE_REQUEST(BaseModel):
     req_end_date   : str
     mentor_email   : str
 
+
+@backend.get('/env')
+def func():
+    return os.getenv("SUPABASE_URL"), os.environ.get("SUPABASE_URL")
+    
 
 @backend.post('/schedule')
 def schedule(input: SCHEDULE_REQUEST):
