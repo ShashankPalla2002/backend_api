@@ -3,4 +3,3 @@ python-dotenv
 logging
 fastapi
 uvicorn
-resquests
