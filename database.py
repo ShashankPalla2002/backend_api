@@ -24,5 +24,5 @@ class DATABASE:
             return response
 
         except Exception as e:
-            self.logger.info("Connection to database failed")
+            self.logger.info(f"Connection to database failed- {e}")
             return None
