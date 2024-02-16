@@ -16,11 +16,6 @@ class SCHEDULE_REQUEST(BaseModel):
     req_start_date : str
     req_end_date   : str
     mentor_email   : str
-
-
-@backend.get('/env')
-def func():
-    return os.getenv("SUPABASE_URL"), os.environ.get("SUPABASE_URL")
     
 
 @backend.post('/schedule')
