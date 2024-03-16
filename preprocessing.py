@@ -1,11 +1,12 @@
 import nltk
+nltk.download('stopwords')
 import string
 
 from nltk.stem     import PorterStemmer
 from nltk.corpus   import stopwords
 from sklearn.base  import BaseEstimator, TransformerMixin
 
-class PREPROCESSING:
+class PREPROCESSING:    
     def __init__(self, logger):
         self.logger = logger
 
