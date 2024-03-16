@@ -3,3 +3,14 @@ python-dotenv
 logging
 fastapi
 uvicorn
+resquests
+beautifulsoup4
+selenium
+time
+bcrypt
+nltk
+scikit-learn
+google-generativeai
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
