@@ -4,7 +4,7 @@ import google.generativeai as genai
 
 class LLM:
     def __init__(self, logger):
-        load_dotenv(r'.env.local')
+        load_dotenv()
         self.logger  = logger
         self.api_key = os.getenv("GEMINI_KEY")
         self.model   = os.getenv("GEMINI_MODEL")
