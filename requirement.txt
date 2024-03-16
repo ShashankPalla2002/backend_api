@@ -6,7 +6,6 @@ uvicorn
 requests
 beautifulsoup4
 selenium
-time
 bcrypt
 nltk
 scikit-learn
