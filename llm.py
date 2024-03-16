@@ -12,6 +12,12 @@ class LLM:
     
     def generate_response(self, value):
         try:
+            if self.api_key == None:
+                self.logger.error(f"api_key is None")
+
+            if self.model == None:
+                self.logger.error(f"model is None")
+
             genai.configure(api_key=self.api_key)
             load_model = genai.GenerativeModel(self.model)
             self.logger.info(f"loaded model successfuly")
