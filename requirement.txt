@@ -3,7 +3,7 @@ python-dotenv
 logging
 fastapi
 uvicorn
-resquests
+requests
 beautifulsoup4
 selenium
 time
