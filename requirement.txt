@@ -11,6 +11,3 @@ bcrypt
 nltk
 scikit-learn
 google-generativeai
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
