@@ -10,3 +10,4 @@ bcrypt
 nltk
 scikit-learn
 google-generativeai
+pandas
