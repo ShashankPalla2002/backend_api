@@ -75,4 +75,4 @@ def recommend_mentors(input:str, topn_skills:int=10, topn_mentors:int=50):
 
 
 if __name__ == "__main__":
-    uvicorn.run(backend, host="localhost", port=9000)
+    uvicorn.run(backend, host="0.0.0.0", port=9000)
