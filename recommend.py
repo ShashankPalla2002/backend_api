@@ -5,10 +5,9 @@ import numpy  as np
 
 from sklearn.metrics.pairwise import cosine_similarity
 
-from database                         import DATABASE
+from database   import DATABASE
 from pipeline   import PIPELINE
 from llm        import LLM
-from similarity import SIMILARITY
 
 
 class RECOMMEND:
@@ -98,22 +97,25 @@ class RECOMMEND:
         try:
             recommendations = []
             llm = LLM(self.logger)
+            data = self.fetch_data(object)
 
             description = llm.generate_response(value)
 
-            if description != 'None':
+            if description.lower() != 'none':
                 new_data = self.process_value(value, description)
-                pipeline = self.deserialize_model('pipeline')
+                pipeline = PIPELINE(self.logger).make_pipeline()
+                # pipeline = self.deserialize_model('pipeline')
 
+                trained_value    = pipeline.fit_transform(data['description'])
                 transformed_data = pipeline.transform(new_data['description'])
-                trained_values   = self.deserialize_model("values")
+                # trained_values   = self.deserialize_model("values")
 
-                similarity       = cosine_similarity(transformed_data, trained_values)
+                similarity       = cosine_similarity(transformed_data, trained_value)
                 self.logger.info(f'calculated the similarity matrix')
                 
                 similar_indices  = np.argsort(similarity[0])[::-1][:topn] 
                 self.logger.info(f'total number of skill recommended: {len(similar_indices)}')       
-                data = self.fetch_data(object)
+                
 
                 for ind in similar_indices:
                     recommendations.append(data.name.loc[ind])
@@ -127,16 +129,4 @@ class RECOMMEND:
 
 
 if __name__ == "__main__":
-    import logging
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
-
-    database = DATABASE(logger)
-    database = database.connect()
-
-    recommend = RECOMMEND(logger)
-    # data = recommend.fetch_data()
-    # recommend.train(data)
-    similarity = SIMILARITY(logger)
-    data = similarity.fetch_data(database)
-    print(recommend.recommend(database, 'Power BI'), data)
+    pass

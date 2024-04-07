@@ -2,7 +2,7 @@ import sys
 from sklearn.pipeline                import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from preprocessing import CONVERT_TO_LOWER, REMOVE_SPECIAL_CHARACTERS, REMOVE_STOPWORDS, STEMMETIZATION
+from preprocessing import CONVERT_TO_LOWER, REMOVE_SPECIAL_CHARACTERS, REMOVE_STOPWORDS, LEMMETIZATION
 
 class PIPELINE:
     def __init__(self, logger):
@@ -15,7 +15,7 @@ class PIPELINE:
                 ('convert_to_lower',          CONVERT_TO_LOWER(self.logger)),
                 ('remove_special_characters', REMOVE_SPECIAL_CHARACTERS(self.logger)),
                 ('remove_stopwords',          REMOVE_STOPWORDS(self.logger)),
-                ('stemmetization',            STEMMETIZATION(self.logger)),
+                ('stemmetization',            LEMMETIZATION(self.logger)),
                 ('vetorizer',                 TfidfVectorizer())
             ])
 

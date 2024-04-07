@@ -2,7 +2,7 @@ import nltk
 nltk.download('stopwords')
 import string
 
-from nltk.stem     import PorterStemmer
+from nltk.stem     import WordNetLemmatizer
 from nltk.corpus   import stopwords
 from sklearn.base  import BaseEstimator, TransformerMixin
 
@@ -52,15 +52,15 @@ class PREPROCESSING:
             self.logger.error(f"error in removing stopwords: {e}")
 
     
-    def stemmetize(self, value:str):
+    def lemmetize(self, value:str):
         try:
-            porter_stemmer = PorterStemmer()
+            lemmer = WordNetLemmatizer()
             final_value    = ""
 
             for word in value.split(" "):
-                final_value += " " + porter_stemmer.stem(word)
+                final_value += " " + lemmer.lemmatize(word)
 
-            self.logger.info(f"value after stemmetizing: {final_value}")
+            self.logger.info(f"value after lemmetizing: {final_value}")
             return final_value
 
         except Exception as e:
@@ -103,7 +103,7 @@ class REMOVE_STOPWORDS(BaseEstimator, TransformerMixin, PREPROCESSING):
         return X
     
 
-class STEMMETIZATION(BaseEstimator, TransformerMixin, PREPROCESSING):
+class LEMMETIZATION(BaseEstimator, TransformerMixin, PREPROCESSING):
     def __init__(self, logger):
         self.logger = logger
 
@@ -111,5 +111,5 @@ class STEMMETIZATION(BaseEstimator, TransformerMixin, PREPROCESSING):
         return self
     
     def transform(self, X, y=None):
-        X = X.apply(lambda x: PREPROCESSING(self.logger).stemmetize(x))
+        X = X.apply(lambda x: PREPROCESSING(self.logger).lemmetize(x))
         return X

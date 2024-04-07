@@ -55,17 +55,24 @@ def recommend_mentors(input:str, topn_skills:int=10, topn_mentors:int=50):
         recommend = RECOMMEND(logger)
         skills = recommend.recommend(response, input, topn_skills)
 
-        similarity          = SIMILARITY(logger)
-        mentors             = similarity.fetch_data(response)
-        recommended_mentors = similarity.jaccard_similarity(skills, mentors, topn_mentors)
-
-        return JSONResponse(content={'Error': '', 'response':json.dumps(recommended_mentors, indent=2)}, status_code=200)
+        if len(skills) > 0:
+            similarity          = SIMILARITY(logger)
+            mentors             = similarity.fetch_data(response)
+            recommended_mentors = similarity.calculate_similar_mentors(skills, mentors, topn_mentors)
+            
+            logger.info(f'Number of mentors recommended: {len(recommended_mentors)}')
+            return JSONResponse(content={'Error': '', 'response':json.dumps(recommended_mentors, indent=2)}, status_code=200)
+        
+        else:
+            logger.info(f'Number of mentors recommended: 0')
+            return JSONResponse(content={'Error': '', 'response':json.dumps([], indent=2)}, status_code=200)        
 
 
     except Exception as e:
+        logger.error(f'Error while recommending mentors: {e}')
         return JSONResponse(content={'Error': e, 'response': ''}, status_code=422)
 
 
 
 if __name__ == "__main__":
-    uvicorn.run(backend, host="0.0.0.0", port=9000)
+    uvicorn.run(backend, host="localhost", port=9000)

@@ -30,6 +30,7 @@ class LLM:
             2. Avoid mentioning any specific organizations (e.g., Google, Microsoft).
             3. If the keyword isn't related to technology, software, or programming, provide "None" as output.
             4. If the keyword is a person's name, provide "None" as output.
+            5. Also give a technical level skill that one should acquire to learn the keyword. Only give the skills individually. Ex: data structures, data analysis, data engineering, programming languages, devops, etc.
 
             **Keyword:** {value}
             '''
