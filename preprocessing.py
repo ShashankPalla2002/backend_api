@@ -1,5 +1,6 @@
 import nltk
 nltk.download('stopwords')
+nltk.download('wordnet')
 import string
 
 from nltk.stem     import WordNetLemmatizer
