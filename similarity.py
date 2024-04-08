@@ -19,6 +19,7 @@ class SIMILARITY:
                 d = {}
                 d['uuid']            = value['uniq_id']
                 d['name']            = value['name']
+                d['male']            = value['male']
                 d['profession']      = value['profession']
                 d['company']         = value['company']
                 d['experience']      = value['experience']
